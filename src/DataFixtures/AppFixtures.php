@@ -48,7 +48,11 @@ class AppFixtures extends Fixture
             $randNbComment = mt_rand(0, 15);
             $postComment = [];
             for ($j=0; $j < $randNbComment ; $j++) { 
-                # code...
+                $newComment = new Comment();
+                $newComment->setUserName("personnage #". $j);
+                $newComment->setBoby("tratratratratagabada");
+                $newComment->setPost($newPost);
+                $manager->persist($newComment);
             }
 
             $manager->persist($newPost);

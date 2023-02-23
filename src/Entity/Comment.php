@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use DateTime;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -42,6 +42,17 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $boby;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new DateTime());
+        
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +115,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getBoby(): ?string
+    {
+        return $this->boby;
+    }
+
+    public function setBoby(string $boby): self
+    {
+        $this->boby = $boby;
 
         return $this;
     }
