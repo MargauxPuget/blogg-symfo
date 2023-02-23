@@ -47,8 +47,8 @@ class Author
 
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
         $this->setCreatedAt(new DateTime());
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int

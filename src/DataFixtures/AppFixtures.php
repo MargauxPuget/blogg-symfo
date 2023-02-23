@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Author;
+use App\Entity\Post;
+use App\Entity\Comment;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -30,6 +32,27 @@ class AppFixtures extends Fixture
         $allAuthorObject[] = $newAuthor;
         
 
+        // TODO : créer 20 posts
+        for ($i=1; $i < 20 ; $i++) { 
+            
+            $newPost = new Post();
+            $newPost->setTitle("La croche du siècle #". $i);
+            $newPost->setBody("blablablablablablablablablablablablablablablablablablablablablablablablablablablabla");
+            // ajout d'un autheur au hasard
+            $author = array_rand($allAuthorObject, 1);
+            $newPost->setAuthor($allAuthorObject[$author]);
+            // création d'un nombre de like entre 0 et 100
+            $randLike = mt_rand(0, 100);
+            $newPost->setNbLikes($randLike);
+            // création d'un nombre de commentaires entre 0 et 15
+            $randNbComment = mt_rand(0, 15);
+            $postComment = [];
+            for ($j=0; $j < $randNbComment ; $j++) { 
+                # code...
+            }
+
+            $manager->persist($newPost);
+        }
 
         $manager->flush();
     }

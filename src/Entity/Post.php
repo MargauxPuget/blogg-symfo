@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -62,6 +63,8 @@ class Post
 
     public function __construct()
     {
+        $this->setCreatedAt(new datetime());
+        $this->setNbLikes(0);
         $this->comments = new ArrayCollection();
     }
 
