@@ -18,4 +18,14 @@ class MainController extends AbstractController
             'pageName' => 'Accueil',
         ]);
     }
+
+    /**
+     * @Route("/post/{index}",name="app_main_post", requirements={"index"="\d+"})
+     */
+    public function post(): Response
+    {
+        return $this->render('main/post.html.twig', [
+            'pageName' => 'PostID',
+        ]);
+    }
 }

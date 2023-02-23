@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blogg | {{ pageName }}{% endblock %}
+
+{% block main %}
+
+    <div class="flex row">
+
+        <aside class="w-1/4 mx-5 rounded-lg bg-cyan-400 p-5 text-start">
+            info post
+            nom auteur
+            type de post
+            date de publication
+        </aside>
+
+        <div class="">
+          <div class="p-5">
+            <h2>title post</h2>
+            <img class="fit-picture" src="/media/cc0-images/grapefruit-slice-332-332.jpg" alt="image post">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+            <span class="inline-block my-2 py-1 px-4 rounded-lg bg-orange-600 hover:bg-orange-800 hover:text-white"><a href="#">Modifier</a></span>
+            <span class="inline-block my-2 py-1 px-4 rounded-lg bg-red-600 hover:bg-red-800 hover:text-white"><a href="#">Supprimer</a></span>
+                    
+          </div>
+        </div>
+
+    </div>
+{% endblock %}
