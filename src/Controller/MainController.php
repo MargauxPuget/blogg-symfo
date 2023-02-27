@@ -104,4 +104,48 @@ class MainController extends AbstractController
 
         return $this->redirectToRoute("app_post", ["index" => $index]);
     }
+
+    /**
+     * @Route("/post/{index}/edit", name="post_edit", methods={"GET", "POST"}, requirements={"index":"\d+"})
+     */
+    public function edit($index, Request $request, PostRepository $postRepository, EntityManagerInterface $entityManager)   
+    {
+        // 1. Il me faut un objet à associer à mon formulaire
+        // dans le cas d'une modification, je vais chercher mon objet en BDD
+        $updatePost = $postRepository->find($index);
+        
+        // 2. je créer mon formulaire depuis le bon FormType
+        // je lui donne mon objet, pour qu'il fasse l'association en auto
+        $form = $this->createForm(PostType::class, $updatePost);
+
+        // 3. je demande au formulaire de gérer les informations venant de la requete
+        // 3.1. $formTitle = $request->request->get('title');
+        // 3.2. $updatePost->setTitle($formTitle);
+        $form->handleRequest($request);
+        
+        // DEBUG mon entité est remplit
+        //dd($newPost);
+            
+        // 4. je vérifie que le formulaire a été soumis
+        if ($form->isSubmitted() && $form->isValid())
+        {
+
+            // ? https://symfony.com/doc/current/doctrine.html#persisting-objects-to-the-database
+
+            // TODO : flush, j'ai besoin de l'EntityManagerInterface
+            // injection de dépendance
+            $entityManager->flush();
+
+            // TODO après un ajout, faire une redirection
+            // j'ai l'id de mon objet à jour car j'ai fait un flush avant
+            return $this->redirectToRoute("app_post", ["index" => $updatePost->getId()]);
+        }
+
+       
+        // 5. afficher un formulaire
+        //? https://symfony.com/doc/5.4/forms.html#rendering-forms
+        return $this->renderForm("main/addPost.html.twig", [
+            "formulaire" => $form
+        ]);
+    }
 }
