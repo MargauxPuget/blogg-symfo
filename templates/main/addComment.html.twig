@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div class="w-4/5 m-auto">
+  <h1>Ajout d'article</h1>
+
+  {{ form_start(formulaire, {'attr': {'novalidate': 'novalidate'}}) }}
+
+      {{ form_row(formulaire.userName) }}
+      {{ form_row(formulaire.boby) }}
+      <div class="mb-3">
+          <button type="submit" class="btn btn-danger inline-block my-2 py-1 px-4 rounded-lg bg-purple-600 hover:bg-purple-800 hover:text-white">Enregistrer</button>
+      </div>
+  {# le form_end affiche automatiquement tout les éléménts dont on a pas demandé l'affichage #}
+  {{ form_end(formulaire) }}
+</div>
+{% endblock %}
+

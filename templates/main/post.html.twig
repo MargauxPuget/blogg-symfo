@@ -29,9 +29,16 @@
               <a href="{{ path('app_post_delete', {'id' : postForView.id })}}">
                 Supprimer
               </a>
-            </span>
-                    
+            </span> 
           </div>
+
+          <h2 class="py-3 text-xl font-semibold">Les commentaires : </h2>
+          <a href="{{ path('app_comment_add', {'idPost' : postForView.id })}}" class="inline-block my-2 mx-2  py-1 px-4 rounded-lg bg-blue-600 hover:bg-blue-800 hover:text-white">Ajouter un commentaire !</a>
+          {% for comment in commentForView %}
+            <div>
+              <p class="m-2">{{comment.userName}} - {{ comment.createdAt|date('d-M-Y') }} : {{comment.boby}}</p>
+            </div>
+          {% endfor %}
         </div>
 
     </div>

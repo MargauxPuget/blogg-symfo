@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\Author;
+use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\PostType;
+use App\Form\CommentType;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,12 +44,21 @@ class MainController extends AbstractController
     /**
      * @Route("/post/{index}", name="app_post", requirements={"index"="\d+"})
      */
-    public function post($index, PostRepository $postRepository): Response
+    public function post($index, PostRepository $postRepository, CommentRepository $commentRepository): Response
     {
         $post = $postRepository->find($index);
         dump($post);
+
+        $allComments = $commentRepository->findBy(
+        [
+            "post" => $post
+        ]
+        );
+        dump($allComments);
+
         return $this->render('main/post.html.twig', [
             "postForView" => $post,
+            "commentForView" => $allComments,
             'pageName' => 'PostID',
         ]);
     }
@@ -88,6 +100,33 @@ class MainController extends AbstractController
         }
 
         return $this->renderForm("main/addPost.html.twig", [
+           "formulaire" => $form
+        ]);
+    }
+
+    /**
+     * Ajout d'un comment à un article donnée
+     *
+     * @Route("/comment/add/{idPost}", name="app_comment_add", methods={"GET", "POST"}, requirements={"idPost"="\d+"})
+     */
+    public function addComment($idPost, Request $request, CommentRepository $commentRepository, PostRepository $postRepository){
+        
+        $post = $postRepository->find($idPost);
+        $newComment = new Comment();
+        $newComment->setPost($post);
+
+        $form = $this->createForm(CommentType::class, $newComment);
+
+        $form->handleRequest($request);
+        dump($newComment);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $commentRepository->add($newComment, true);
+            return $this->redirectToRoute("app_post", ["index" => $post->getId()]);
+        }
+
+        return $this->renderForm("main/addComment.html.twig", [
            "formulaire" => $form
         ]);
     }
