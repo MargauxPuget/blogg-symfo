@@ -36,4 +36,20 @@ class MainController extends AbstractController
             'pageName' => 'PostID',
         ]);
     }
+
+    /**
+     * Route de suppression d'article
+     * 
+     * @Route("/post/{id}/delete", name="app_post_delete", requirements={"id"="\d+"})
+     *
+     * @return void
+     */
+    public function deletePost($id, PostRepository $postRepository){
+
+        $postToDelete = $postRepository->find($id);
+        // remove + flush
+        $postRepository->remove($postToDelete, true);
+
+        return $this->redirectToRoute("default");
+    }
 }

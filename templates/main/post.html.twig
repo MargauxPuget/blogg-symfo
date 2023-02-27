@@ -17,7 +17,11 @@
             <h2 class="py-3 text-xl font-semibold">{{postForView.title}}</h2>
             <p>{{ postForView.body }}</p>
             <span class="inline-block my-2 py-1 px-4 rounded-lg bg-orange-600 hover:bg-orange-800 hover:text-white"><a href="#">Modifier</a></span>
-            <span class="inline-block my-2 py-1 px-4 rounded-lg bg-red-600 hover:bg-red-800 hover:text-white"><a href="#">Supprimer</a></span>
+            <span class="inline-block my-2 py-1 px-4 rounded-lg bg-red-600 hover:bg-red-800 hover:text-white">
+              <a href="{{ path('app_post_delete', {'id' : postForView.id })}}">
+                Supprimer
+              </a>
+            </span>
                     
           </div>
         </div>
