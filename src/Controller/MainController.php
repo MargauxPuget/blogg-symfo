@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Form\PostType;
 use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
@@ -87,5 +88,20 @@ class MainController extends AbstractController
         return $this->renderForm("main/addPost.html.twig", [
            "formulaire" => $form
         ]);
+    }
+
+    /**
+    * Ajoute un like à un article 
+    * @Route("/post/{index}/like", name="post_add_like", requirements={"index"="\d+"})
+     */
+    public function editLike($index, PostRepository $postRepository, EntityManagerInterface $entityManager)
+    {
+        $postToUpdate = $postRepository->find($index);
+        $nblikeActuel = $postToUpdate->getNbLikes();
+        $postToUpdate->setNbLikes($nblikeActuel +1);
+        dump($nblikeActuel, $postToUpdate);
+        $entityManager->flush();        
+
+        return $this->redirectToRoute("app_post", ["index" => $index]);
     }
 }

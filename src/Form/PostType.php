@@ -37,6 +37,7 @@ class PostType extends AbstractType
             ->add('nbLikes', IntegerType::class, [
                 'empty_data' => ""
             ])
+            ->add('summary', TextareaType::class)
             /*
             ->add('publishedAt')
             ->add('createdAt')

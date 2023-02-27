@@ -8,6 +8,7 @@
 
       {{ form_row(formulaire.author) }}
       {{ form_row(formulaire.title) }}
+      {{ form_row(formulaire.summary) }}
       {{ form_row(formulaire.body) }}
       {{ form_row(formulaire.poster) }}
       {{ form_row(formulaire.nbLikes) }}
@@ -16,32 +17,6 @@
       </div>
   {# le form_end affiche automatiquement tout les éléménts dont on a pas demandé l'affichage #}
   {{ form_end(formulaire) }}
-
-
-  {#
-  <form method="POST">
-      <div class="mb-3">
-          <label for="title" class="form-label">Le titre de l'article</label>
-          <input type="text" class="form-control" name="title">
-      </div>
-      <div class="mb-3">
-          <label for="body" class="form-label">L'article</label>
-          <textarea class="form-control" name="body"></textarea>
-      </div>
-          <div class="mb-3">
-          <label for="author" class="form-label">Auteur de l'article</label>
-          <select class="form-select" name="author">
-              {% for author in authorList %}
-                  <option value="{{ author.id }}">{{ author.firstname }} {{ author.lastname }}</option>    
-              {% endfor %}
-          </select>
-      </div>
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Ajouter</button>
-      </div>
-  </form>
-  <hr>
-  #}
 </div>
 {% endblock %}
 
