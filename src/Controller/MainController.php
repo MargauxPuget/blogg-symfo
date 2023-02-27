@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
+use App\Form\PostType;
 use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends AbstractController
 {
@@ -58,5 +62,30 @@ class MainController extends AbstractController
         $postRepository->remove($postToDelete, true);
 
         return $this->redirectToRoute("default");
+    }
+
+    /**
+     * Ajout d'un article
+     *
+     * @Route("/post/add", name="app_post_add", methods={"GET", "POST"})
+     */
+    public function addPost(Request $request, PostRepository $postRepository){
+        
+        $newPost = new Post();
+
+        $form = $this->createForm(PostType::class, $newPost);
+
+        $form->handleRequest($request);
+        dump($newPost);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $postRepository->add($newPost, true);
+            return $this->redirectToRoute("app_post", ["index" => $newPost->getId()]);
+        }
+
+        return $this->renderForm("main/addPost.html.twig", [
+           "formulaire" => $form
+        ]);
     }
 }

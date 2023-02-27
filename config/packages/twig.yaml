@@ -1,5 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    # pour rendre nos formulaires zolis
+    # form_themes: ['bootstrap_5_layout.html.twig']
+    # https://symfony.com/doc/5.4/form/form_themes.html#symfony-builtin-forms
+    form_themes: ['tailwind_2_layout.html.twig']
 
 when@test:
     twig:
