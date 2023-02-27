@@ -18,14 +18,19 @@
     <body class="bg-cyan-400/50">
         <header>
             <nav class="flex justify-between m-10">
-            <div class="text-xl font-bold"><a href="{{ path("default") }}">Blogg</a></div>
-                <ul class="flex">
-                    <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 1</a></li>
-                    <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 2</a></li>
-                    <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 3</a></li>
-                    <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 4</a></li>
-                    <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 5</a></li>
-                </ul>
+            <div class="text-xl font-bold">
+                <a href="{{ path("default") }}">Blogg</a>
+            </div>
+            <div class="inline-block my-2 mx-2  py-1 px-4 rounded-lg bg-blue-600 hover:bg-blue-800 hover:text-white">
+                <a href="">Ajout d'un article</a>
+            </div>
+            {# <ul class="flex">
+                <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 1</a></li>
+                <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 2</a></li>
+                <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 3</a></li>
+                <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 4</a></li>
+                <li class="py-0.1 px-4 rounded-lg hover:font-semibold"><a href="#">Type 5</a></li>
+            </ul> #}
             </nav>
         </header>
         <main>

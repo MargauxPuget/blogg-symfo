@@ -18,6 +18,7 @@ composer require --dev symfony/debug-bundle
 composer require --dev symfony/maker-bundle
 composer require symfony/orm-pack
 composer require --dev orm-fixtures
+composer require symfony/form
 
 ```
 
