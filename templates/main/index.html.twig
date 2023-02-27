@@ -9,8 +9,10 @@
         <aside class="w-1/3 mx-20 rounded-lg bg-cyan-400 p-5 text-justify">
             Les auteurs :
             {% for author in allAuthors %}
-                <p class="ml-3">{{author.firstname}} {{author.lastname}}</p>
+                <p class="ml-3 hover:font-semibold">{{author.firstname}} {{author.lastname}}</p>
             {% endfor %}
+
+                <span class="inline-block my-2 mx-2  py-1 px-4 rounded-lg bg-blue-600 hover:bg-blue-800 hover:text-white"><a href="{{ path('app_author_add') }}">Ajouter un auteur</a></p>
         </aside>
 
         <div class="flex flex-row flex-wrap	gap-4 items-start ">

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Author;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\PostType;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -91,6 +93,31 @@ class MainController extends AbstractController
     }
 
     /**
+     * Ajout d'un auteur
+     *
+     * @Route("/author/add", name="app_author_add", methods={"GET", "POST"})
+     */
+    public function addAuthor(Request $request, AuthorRepository $authorRepository){
+        
+        $newAuthor = new Author();
+
+        $form = $this->createForm(AuthorType::class, $newAuthor);
+
+        $form->handleRequest($request);
+        dump($newAuthor);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $authorRepository->add($newAuthor, true);
+            return $this->redirectToRoute("default");
+        }
+
+        return $this->renderForm("main/addAuthor.html.twig", [
+           "formulaire" => $form
+        ]);
+    }
+
+    /**
     * Ajoute un like à un article 
     * @Route("/post/{index}/like", name="post_add_like", requirements={"index"="\d+"})
      */
@@ -141,7 +168,6 @@ class MainController extends AbstractController
             return $this->redirectToRoute("app_post", ["index" => $updatePost->getId()]);
         }
 
-       
         // 5. afficher un formulaire
         //? https://symfony.com/doc/5.4/forms.html#rendering-forms
         return $this->renderForm("main/addPost.html.twig", [
