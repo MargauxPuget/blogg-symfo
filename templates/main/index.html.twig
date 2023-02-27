@@ -8,15 +8,23 @@
 
         <aside class="w-1/3 mx-20 rounded-lg bg-cyan-400 p-5 text-justify">
             Les auteurs :
+            {% for author in allAuthors %}
+                <p class="ml-3">{{author.firstname}} {{author.lastname}}</p>
+            {% endfor %}
         </aside>
 
         <div class="flex flex-row flex-wrap	gap-4 items-start ">
         
             {% for post in allPosts %}
-                <div class="rounded-lg bg-cyan-400 text-justify h-60 w-48">
+                <div class="rounded-lg bg-cyan-400 text-justify h-80 w-48">
                     <img class="fit-picture rounded-t-lg" src={{post.poster}} alt="image post">
                     <a href="{{ path("app_post", {index : post.id}) }}"><h3 class="p-2 font-semibold">{{post.title}}</h3></a>
                     <p class="p-2 break-words">{{post.summary}}</p>
+                    <span class="inline-block my-2 mx-2  py-1 px-4 rounded-lg bg-blue-600 hover:bg-blue-800 hover:text-white">
+                        <a href="{{ path('app_post', {index : post.id })}}">
+                            Voir plus ...
+                        </a>
+                    </span>
                 </div>
             {% endfor %}
             
