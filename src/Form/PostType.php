@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +18,9 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'empty_data' => ""
+            ])
+            ->add('poster', TextType::class, [
                 'empty_data' => ""
             ])
             ->add('body', TextareaType::class)
@@ -29,7 +33,16 @@ class PostType extends AbstractType
                 // ! Object of class App\Entity\Author could not be converted to string
                 // je dois préciser quelle propriété doit être afficher dans la liste déroulante
                 'choice_label' => 'firstname',
-            ]);
+            ])
+            ->add('nbLikes', IntegerType::class, [
+                'empty_data' => ""
+            ])
+            /*
+            ->add('publishedAt')
+            ->add('createdAt')
+            ->add('updatedAt')
+            */
+            ;
             
     }
 
