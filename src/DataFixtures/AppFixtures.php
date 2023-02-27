@@ -53,6 +53,7 @@ class AppFixtures extends Fixture
                 $newComment->setBoby("tratratratratagabada");
                 $newComment->setPost($newPost);
                 $manager->persist($newComment);
+                $postComment[] = $newComment;
             }
 
             $manager->persist($newPost);
