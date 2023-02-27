@@ -17,18 +17,22 @@ class MainController extends AbstractController
     {
         // TODO :  aller cherche tous les posts de la BDD
         $allPostfromBDD = $postRepository->findAll();
+        dump($allPostfromBDD);
         return $this->render('main/index.html.twig', [
             'pageName' => 'Accueil',
-            'allPost' => $allPostfromBDD
+            'allPosts' => $allPostfromBDD
         ]);
     }
 
     /**
-     * @Route("/post/{index}",name="app_main_post", requirements={"index"="\d+"})
+     * @Route("/post/{index}", name="app_post", requirements={"index"="\d+"})
      */
-    public function post(): Response
+    public function post($index, PostRepository $postRepository): Response
     {
+        $post = $postRepository->find($index);
+        dump($post);
         return $this->render('main/post.html.twig', [
+            "postForView" => $post,
             'pageName' => 'PostID',
         ]);
     }
